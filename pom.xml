@@ -20,7 +20,6 @@
     </properties>
 
     <modules>
-        <module>ai-center-starter</module>
         <module>ai-center-app</module>
         <module>ai-center-web</module>
         <module>ai-center-client</module>
@@ -62,6 +61,7 @@
                 <artifactId>ai-center-web</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <!--自建框架-->
             <dependency>
                 <groupId>com.xiaobaicai.framework</groupId>
                 <artifactId>framework-common</artifactId>
@@ -88,14 +88,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-archetype-plugin</artifactId>
-                <version>3.0.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+               <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
             </plugin>
         </plugins>
     </build>
