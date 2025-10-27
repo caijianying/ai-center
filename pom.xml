@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.xiaobaicai.framework</groupId>
+        <artifactId>framework-bom</artifactId>
+        <version>1.0.1</version>
+    </parent>
+
+    <groupId>com.xiaobaicai.ai.center</groupId>
+    <artifactId>ai-center</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <revision>1.0.0</revision>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <framework.reversion>1.0.1</framework.reversion>
+    </properties>
+
+    <modules>
+        <module>ai-center-starter</module>
+        <module>ai-center-app</module>
+        <module>ai-center-web</module>
+        <module>ai-center-client</module>
+        <module>ai-center-infrastructure</module>
+        <module>ai-center-domain</module>
+        <module>ai-center-util</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--项目module版本管理-->
+            <dependency>
+                <groupId>com.xiaobaicai.ai.center</groupId>
+                <artifactId>ai-center-util</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.ai.center</groupId>
+                <artifactId>ai-center-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.ai.center</groupId>
+                <artifactId>ai-center-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.ai.center</groupId>
+                <artifactId>ai-center-app</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.ai.center</groupId>
+                <artifactId>ai-center-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.ai.center</groupId>
+                <artifactId>ai-center-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.framework</groupId>
+                <artifactId>framework-common</artifactId>
+                <version>${framework.reversion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.framework</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${framework.reversion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.framework</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${framework.reversion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaobaicai.framework</groupId>
+                <artifactId>spring-boot-starter-ai</artifactId>
+                <version>${framework.reversion}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>3.0.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

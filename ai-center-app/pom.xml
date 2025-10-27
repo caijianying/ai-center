@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ai-center</artifactId>
+        <groupId>com.xiaobaicai.ai.center</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>ai-center-app</artifactId>
+
+    <properties>
+        <revision>1.0.0</revision>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xiaobaicai.ai.center</groupId>
+            <artifactId>ai-center-domain</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
