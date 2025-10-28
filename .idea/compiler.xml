@@ -12,9 +12,11 @@
         <module name="ai-center-web" />
         <module name="ai-center-app" />
         <module name="ai-center-domain" />
-        <module name="ai-center-starter" />
         <module name="ai-center-util" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ai-center-starter" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
