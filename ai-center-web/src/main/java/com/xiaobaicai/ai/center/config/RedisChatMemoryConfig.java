@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author xiaobaicai
- * @date 2025/10/28 星期二 17:46
  */
 @Configuration
 public class RedisChatMemoryConfig {

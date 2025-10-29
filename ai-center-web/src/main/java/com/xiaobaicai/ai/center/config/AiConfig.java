@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author xiaobaicai
- * @date 2025/10/27 星期一 17:33
+ * 2025/10/27 星期一 17:33
  */
 @Configuration
 public class AiConfig {
@@ -55,9 +55,7 @@ public class AiConfig {
 
     /**
      * 阿里云百炼大模型-deepSeek
-     *
-     * @return
-     **/
+     */
     @Bean(name = "deepseek")
     public ChatModel deepSeekChatModel() {
         String DEEP_SEEK_MODEL = "deepseek-v3";
@@ -69,9 +67,7 @@ public class AiConfig {
 
     /**
      * 阿里云百炼大模型-qwen-plus
-     *
-     * @return
-     **/
+     */
     @Bean(name = "qwen")
     public ChatModel qwenChatModel() {
         String qwenPlus = "qwen-plus";
@@ -82,8 +78,8 @@ public class AiConfig {
     }
 
     /**
-    * Ollama大模型-qwen0.5b
-    **/
+     * Ollama大模型-qwen0.5b
+     */
     @Bean(name = "ollama-qwen0.5b")
     public ChatModel ollamaQwenChatModel() {
         OllamaApi ollamaApi = OllamaApi.builder().build();
@@ -92,8 +88,7 @@ public class AiConfig {
 
     /**
      * Ollama大模型-llama3
-     * @return
-     **/
+     */
     @Bean(name = "ollama3")
     public ChatModel ollama3ChatModel() {
         OllamaApi ollamaApi = OllamaApi.builder().build();
