@@ -5,6 +5,9 @@ import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import jakarta.annotation.Resource;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaApi;
@@ -40,8 +43,14 @@ public class AiConfig {
     }
 
     @Bean
-    public ChatClient ollamaChatClient() {
-        return ChatClient.create(ollamaChatModel);
+    public ChatClient ollamaChatClient(ChatMemoryRepository redisChatMemoryRepository) {
+        MessageWindowChatMemory windowChatMemory = MessageWindowChatMemory.builder()
+                .chatMemoryRepository(redisChatMemoryRepository)
+                .maxMessages(20)
+                .build();
+        return ChatClient.builder(ollamaChatModel)
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(windowChatMemory).build())
+                .build();
     }
 
     /**
