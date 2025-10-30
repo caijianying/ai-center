@@ -57,13 +57,13 @@ public class VectorStoreConfig {
                 return;
             }
             VectorInfoModel dbRecord = JSONObject.parseObject(dbObject.toString(), VectorInfoModel.class);
-            if (dbRecord.getIds().equals(docIds)) {
+            if (dbRecord.getLastModified().equals(vectorInfo.getLastModified())) {
                 log.info("Vector store nothing to update.");
                 return;
             }
             String dbIds = dbRecord.getIds();
             if (documentList != null) {
-                stringRedisTemplate.opsForValue().setIfAbsent(key, JSON.toJSONString(VectorInfoModel.class));
+                stringRedisTemplate.opsForValue().setIfAbsent(key, JSON.toJSONString(vectorInfo));
                 vectorStore.delete(Arrays.asList(dbIds.split(",")));
                 vectorStore.add(documentList);
                 log.info("Vector store loaded successfully.");
