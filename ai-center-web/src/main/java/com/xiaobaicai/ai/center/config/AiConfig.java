@@ -1,5 +1,6 @@
 package com.xiaobaicai.ai.center.config;
 
+import com.alibaba.cloud.ai.advisor.RetrievalRerankAdvisor;
 import com.alibaba.cloud.ai.dashscope.api.DashScopeApi;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
@@ -12,6 +13,9 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaApi;
 import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +36,9 @@ public class AiConfig {
     @Resource
     private ChatModel ollamaChatModel;
 
+    @Resource
+    private VectorStore vectorStore;
+
     @Bean
     public DashScopeApi getDashScopeApi() {
         return DashScopeApi.builder().apiKey(apikey).build();
@@ -48,8 +55,16 @@ public class AiConfig {
                 .chatMemoryRepository(redisChatMemoryRepository)
                 .maxMessages(20)
                 .build();
+        MessageChatMemoryAdvisor messageChatMemoryAdvisor = MessageChatMemoryAdvisor.builder(windowChatMemory).build();
+
+        VectorStoreDocumentRetriever documentRetriever = VectorStoreDocumentRetriever.builder()
+                .vectorStore(vectorStore)
+                .build();
+        RetrievalAugmentationAdvisor retrievalAugmentationAdvisor = RetrievalAugmentationAdvisor.builder()
+                .documentRetriever(documentRetriever)
+                .build();
         return ChatClient.builder(ollamaChatModel)
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(windowChatMemory).build())
+                .defaultAdvisors(messageChatMemoryAdvisor, retrievalAugmentationAdvisor)
                 .build();
     }
 

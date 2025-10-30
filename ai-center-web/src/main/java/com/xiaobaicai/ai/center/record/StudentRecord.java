@@ -5,3 +5,4 @@ package com.xiaobaicai.ai.center.record;
  * @author xiaobaicai
  */
 public record StudentRecord(String id, String name, String email) {}
+
