@@ -4,6 +4,8 @@ import com.alibaba.cloud.ai.advisor.RetrievalRerankAdvisor;
 import com.alibaba.cloud.ai.dashscope.api.DashScopeApi;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatModel;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
+import com.alibaba.cloud.ai.dashscope.rag.DashScopeDocumentRetriever;
+import com.alibaba.cloud.ai.dashscope.rag.DashScopeDocumentRetrieverOptions;
 import jakarta.annotation.Resource;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -41,12 +43,25 @@ public class AiConfig {
 
     @Bean
     public DashScopeApi getDashScopeApi() {
-        return DashScopeApi.builder().apiKey(apikey).build();
+        return DashScopeApi.builder()
+                .apiKey(apikey)
+                // 非必填，云上知识库才有用。路径：应用开发-默认业务空间-详情-业务空间ID
+                .workSpaceId("llm-lkr3x0w7kg09g06w")
+                .build();
     }
 
     @Bean
     public ChatClient dashScopeChatClient() {
-        return ChatClient.create(dashscopeChatModel);
+        DashScopeDocumentRetriever ops = new DashScopeDocumentRetriever(getDashScopeApi(), DashScopeDocumentRetrieverOptions.builder()
+                // 添加百炼平台上知识库名称,注意要在getDashScopeApi上设置工作空间
+                .withIndexName("ops")
+                .build());
+        RetrievalAugmentationAdvisor retrievalAugmentationAdvisor = RetrievalAugmentationAdvisor.builder()
+                .documentRetriever(ops)
+                .build();
+        return ChatClient.builder(dashscopeChatModel)
+                .defaultAdvisors(retrievalAugmentationAdvisor)
+                .build();
     }
 
     @Bean
@@ -56,7 +71,6 @@ public class AiConfig {
                 .maxMessages(20)
                 .build();
         MessageChatMemoryAdvisor messageChatMemoryAdvisor = MessageChatMemoryAdvisor.builder(windowChatMemory).build();
-
         VectorStoreDocumentRetriever documentRetriever = VectorStoreDocumentRetriever.builder()
                 .vectorStore(vectorStore)
                 .build();

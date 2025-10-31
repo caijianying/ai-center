@@ -70,7 +70,7 @@ public class VectorStoreConfig {
             }
 
         } catch (Throwable ex) {
-            log.error("vector store load error", ex);
+            log.error("Vector store load error", ex);
         }
     }
 

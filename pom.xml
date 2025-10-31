@@ -26,6 +26,7 @@
         <module>ai-center-infrastructure</module>
         <module>ai-center-domain</module>
         <module>ai-center-util</module>
+        <module>ai-center-mcp-server</module>
     </modules>
 
     <dependencyManagement>
