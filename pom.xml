@@ -27,6 +27,8 @@
         <module>ai-center-domain</module>
         <module>ai-center-util</module>
         <module>ai-center-mcp-server</module>
+        <module>ai-center-mcp-client</module>
+        <module>ai-center-agent-web</module>
     </modules>
 
     <dependencyManagement>
