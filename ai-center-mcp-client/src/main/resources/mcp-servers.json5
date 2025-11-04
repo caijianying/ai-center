@@ -1,10 +1,10 @@
 {
   "mcpServers": {
-    "get-location": {
-      "command": "npx",
+    "email-mcp": {
+      "command": "node",
       "args": [
-        "-y",
-        "@mcpcn/mcp-get-location"
+        "/Users/jianyingcai/dev/ai/email-mcp/build/server.js",
+        "--verbose"
       ],
       "env": {}
     }
